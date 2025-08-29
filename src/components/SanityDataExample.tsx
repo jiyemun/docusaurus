@@ -9,8 +9,16 @@ import TabItem from "@theme/TabItem";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
 
+import imageUrlBuilder from "@sanity/image-url";
+
 export default function SanityDataExample() {
     const [posts, setPosts] = useState<any[]>([]);
+
+    const builder = imageUrlBuilder(client);
+
+    function urlFor(source: any) {
+        return builder.image(source);
+    }
 
     useEffect(() => {
         client
@@ -45,15 +53,24 @@ export default function SanityDataExample() {
                                             ))}
                                         </Tabs>
                                     ),
-
                                     // Code Block → Docusaurus 코드 스타일
                                     code: ({ value }) => (
                                         <pre>
-                      <code className={`language-${value.language || "js"}`}>
-                        {value.code}
-                      </code>
-                    </pre>
+                                          <code className={`language-${value.language || "js"}`}>
+                                            {value.code}
+                                          </code>
+                                        </pre>
                                     ),
+                                    image: ({ value }: any) => {
+                                        if (!value?.asset?._ref) return null;
+                                        return (
+                                            <img
+                                                src={urlFor(value).width(800).url()}
+                                                alt={value.alt || ""}
+                                                style={{ maxWidth: "100%" }}
+                                            />
+                                        );
+                                    }
                                 },
                             }}
                         />

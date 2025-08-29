@@ -20,6 +20,7 @@
     "@mdx-js/react": "^3.0.0",
     "@portabletext/react": "^4.0.1",
     "@sanity/client": "^7.10.0",
+    "@sanity/image-url": "^1.2.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
