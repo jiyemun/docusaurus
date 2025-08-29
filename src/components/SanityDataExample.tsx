@@ -23,7 +23,7 @@ export default function SanityDataExample() {
     // Sanity 데이터 가져오기
     useEffect(() => {
         client
-            .fetch('*[_type == "post"] | order(_createdAt asc){slug, body}')
+            .fetch('*[_type == "post"] | order(_createdAt asc){title, slug, body}')
             .then(setPosts)
             .catch(console.error);
     }, []);
@@ -69,17 +69,17 @@ export default function SanityDataExample() {
     return (
         <div>
             {/*<h2>Sanity Posts</h2>*/}
-            <ul>
+            {/*<ul>*/}
                 {posts.map((p) => (
-                    <li key={p.slug.current}>
-                        <h3>{p.title}</h3>
+                    <div key={p.slug.current} style={{marginBottom: "80px", borderTop:"1px solid #cccccc", paddingTop:"15px"}} >
+                        <h2>{p.title}</h2>
                         <PortableText
                             value={p.body}
                             components={portableTextComponents}
                         />
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            {/*</ul>*/}
         </div>
     );
 }
