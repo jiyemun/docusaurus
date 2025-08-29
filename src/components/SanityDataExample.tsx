@@ -48,7 +48,30 @@ export default function SanityDataExample() {
                                         <Tabs>
                                             {value.tabs.map((tab: any) => (
                                                 <TabItem key={tab._key} value={tab.label} label={tab.label}>
-                                                    <PortableText value={tab.content} />
+                                                    <PortableText
+                                                        value={tab.content}
+                                                        components={{
+                                                            types: {
+                                                                code: ({ value }: any) => (
+                                                                    <pre>
+                                                                      <code className={`language-${value.language || "js"}`}>
+                                                                        {value.code}
+                                                                      </code>
+                                                                    </pre>
+                                                                ),
+                                                                image: ({ value }: any) => {
+                                                                    if (!value?.asset?._ref) return null;
+                                                                    return (
+                                                                        <img
+                                                                            src={urlFor(value).width(800).url()}
+                                                                            alt={value.alt || ""}
+                                                                            style={{ maxWidth: "100%" }}
+                                                                        />
+                                                                    );
+                                                                },
+                                                            },
+                                                        }}
+                                                    />
                                                 </TabItem>
                                             ))}
                                         </Tabs>
