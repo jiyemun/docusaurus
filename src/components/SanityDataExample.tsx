@@ -71,7 +71,7 @@ export default function SanityDataExample() {
             {/*<h2>Sanity Posts</h2>*/}
             {/*<ul>*/}
                 {posts.map((p) => (
-                    <div key={p.slug.current} style={{marginBottom: "80px", borderTop:"1px solid #cccccc", paddingTop:"15px"}} >
+                    <div className={"markdown"} key={p.slug.current}>
                         <h2>{p.title}</h2>
                         <PortableText
                             value={p.body}
